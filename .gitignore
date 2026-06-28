@@ -1,0 +1,24 @@
+.gitignore
+__pycache__/
+*.pyc
+data/
+=======
+# Ignore compiled C++ tools and sub-repositories
+medstruct_ai/core/audio/whisper.cpp/
+*.so
+*.o
+*.bin
+build/
+
+# Python Virtual environments
+.venv/
+venv/
+__pycache__/
+
+# Databases
+*.db
+*.sqlite3
+
+# OS files
+.DS_Store
+>>>>>>> .gitignore
