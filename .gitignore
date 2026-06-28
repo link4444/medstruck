@@ -4,7 +4,7 @@ __pycache__/
 data/
 =======
 # Ignore compiled C++ tools and sub-repositories
-core/audio/whisper.cpp/
+medstruct_ai/core/audio/whisper.cpp/
 *.so
 *.o
 *.bin
