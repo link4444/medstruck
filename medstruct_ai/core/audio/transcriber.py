@@ -22,14 +22,20 @@ def transcribe_audio(file_path: str) -> str:
     if not os.path.exists(MODEL_PATH):
         raise RuntimeError(f"Whisper model not found at {MODEL_PATH}.")
 
+    # T018: Inference Optimization
+    # Leave at least 1 core for the UI to remain responsive during heavy audio parsing
+    num_threads = max(1, os.cpu_count() - 1) if os.cpu_count() else 4
+
     # -otxt forces whisper to write the pure transcription to a .txt file
     # -nt removes timestamps so we just get raw paragraphs
+    # -t defines thread count
     cmd = [
         WHISPER_CLI,
         "-m", MODEL_PATH,
         "-f", file_path,
         "-nt",
-        "-otxt"
+        "-otxt",
+        "-t", str(num_threads)
     ]
     
     # Run the command

@@ -9,6 +9,10 @@ import urllib.error
 VLM_MODEL = "llava"
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
 
+# T018: Inference Optimization
+# Leave at least 1 core for the UI to remain responsive during heavy generation
+NUM_THREADS = max(1, os.cpu_count() - 1) if os.cpu_count() else 4
+
 def encode_image(image_path: str) -> str:
     """Encodes an image to a base64 string."""
     if not os.path.exists(image_path):
@@ -39,7 +43,9 @@ def extract_clinical_data_from_image(image_path: str) -> str:
         "stream": False,
         "options": {
             "temperature": 0.0,
-            "num_predict": 500
+            "num_predict": 500,
+            "num_thread": NUM_THREADS,
+            "num_ctx": 2048  # Cap context to prevent memory ballooning
         }
     }
 

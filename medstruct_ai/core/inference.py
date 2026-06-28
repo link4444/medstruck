@@ -1,4 +1,5 @@
 import json
+import os
 import urllib.request
 import urllib.error
 import logging
@@ -11,6 +12,10 @@ logger = logging.getLogger(__name__)
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
 # We use the medstruct-qwen model we configured in T001
 MODEL = "medstruct-qwen"
+
+# T018: Inference Optimization
+# Leave at least 1 core for the UI to remain responsive during heavy generation
+NUM_THREADS = max(1, os.cpu_count() - 1) if os.cpu_count() else 4
 
 def generate_structured_clinical_insight(text_input: str, max_retries: int = 3) -> ClinicalInsight:
     """
@@ -41,7 +46,9 @@ def generate_structured_clinical_insight(text_input: str, max_retries: int = 3) 
             "format": "json", # Ollama native JSON mode
             "options": {
                 "temperature": 0.0,
-                "num_predict": 1000
+                "num_predict": 1000,
+                "num_thread": NUM_THREADS,
+                "num_ctx": 2048  # Cap context to prevent memory ballooning
             }
         }
         
