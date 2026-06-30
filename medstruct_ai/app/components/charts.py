@@ -14,7 +14,9 @@ def render_dashboard():
     patients = get_all_patients()
 
     if not patients:
-        st.info("No patient data yet. Upload a lab report or audio note to get started.")
+        st.info(
+            "No patient data yet. Upload a lab report or audio note to get started."
+        )
         return
 
     col1, col2 = st.columns([1, 2])
@@ -22,9 +24,7 @@ def render_dashboard():
         patient_options = {
             f"{p['first_name']} {p['last_name']}": p["id"] for p in patients
         }
-        selected_name = st.selectbox(
-            "Select Patient", list(patient_options.keys())
-        )
+        selected_name = st.selectbox("Select Patient", list(patient_options.keys()))
         patient_id = patient_options[selected_name]
 
     metric_rows = get_metrics_for_charts(patient_id)
@@ -43,12 +43,15 @@ def render_dashboard():
                 .mark_line(point=True)
                 .encode(
                     x=alt.X("visit_date:T", title="Visit Date"),
-                    y=alt.Y("value:Q", title=f"{selected_metric} ({metric_df.iloc[0]['unit']})"),
+                    y=alt.Y(
+                        "value:Q",
+                        title=f"{selected_metric} ({metric_df.iloc[0]['unit']})",
+                    ),
                     tooltip=["visit_date", "value", "is_abnormal"],
                 )
                 .properties(height=300)
             )
-            st.altair_chart(chart, width='stretch')
+            st.altair_chart(chart, width="stretch")
         else:
             st.metric(
                 label=f"{selected_metric} ({metric_df.iloc[0]['unit']})",
@@ -81,13 +84,15 @@ def render_dashboard():
             alt.Chart(risk_df)
             .mark_bar()
             .encode(
-                x=alt.X("overall_risk:N", title="Risk Level", sort=["Low", "Medium", "High"]),
+                x=alt.X(
+                    "overall_risk:N", title="Risk Level", sort=["Low", "Medium", "High"]
+                ),
                 y=alt.Y("count:Q", title="Visits"),
                 color=alt.Color("overall_risk:N", scale=color_scale, legend=None),
                 tooltip=["overall_risk", "count"],
             )
             .properties(height=250)
         )
-        st.altair_chart(bar, width='stretch')
+        st.altair_chart(bar, width="stretch")
     else:
         st.info("No risk assessments yet.")

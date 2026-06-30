@@ -39,9 +39,7 @@ elif page == "Upload":
     )
 
     if upload_type == "Audio Note (.wav)":
-        uploaded_file = st.file_uploader(
-            "Choose a WAV audio file", type=["wav"]
-        )
+        uploaded_file = st.file_uploader("Choose a WAV audio file", type=["wav"])
 
         if uploaded_file is not None:
             with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
@@ -99,9 +97,7 @@ elif page == "Upload":
         if uploaded_file is not None:
             file_type = Path(uploaded_file.name).suffix.lower()
 
-            with tempfile.NamedTemporaryFile(
-                suffix=file_type, delete=False
-            ) as tmp:
+            with tempfile.NamedTemporaryFile(suffix=file_type, delete=False) as tmp:
                 tmp.write(uploaded_file.read())
                 tmp_path = tmp.name
 
@@ -120,9 +116,7 @@ elif page == "Upload":
                     image_path_for_vlm = tmp_path
 
                 with st.spinner("Extracting clinical data using local VLM..."):
-                    extracted = extract_clinical_data_from_image(
-                        image_path_for_vlm
-                    )
+                    extracted = extract_clinical_data_from_image(image_path_for_vlm)
                     st.success("Extraction complete")
                     st.text_area("Extracted Data", extracted, height=200)
 
@@ -139,14 +133,10 @@ elif page == "Upload":
 
                     lab_metrics = parse_lab_metrics(extracted)
                     if lab_metrics:
-                        st.info(
-                            f"Detected {len(lab_metrics)} lab metric(s)."
-                        )
+                        st.info(f"Detected {len(lab_metrics)} lab metric(s).")
                         for m in lab_metrics:
                             flag = "⚠️" if m.is_abnormal else "✅"
-                            st.caption(
-                                f"{flag} {m.name}: {m.value} {m.unit}"
-                            )
+                            st.caption(f"{flag} {m.name}: {m.value} {m.unit}")
 
                     if st.button("Save Extraction"):
                         if not first_name or not last_name:

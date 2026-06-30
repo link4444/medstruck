@@ -9,13 +9,15 @@ import urllib.error
 VLM_MODEL = "llava"
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
 
+
 def encode_image(image_path: str) -> str:
     """Encodes an image to a base64 string."""
     if not os.path.exists(image_path):
         raise FileNotFoundError(f"Image not found: {image_path}")
-    
+
     with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode('utf-8')
+        return base64.b64encode(image_file.read()).decode("utf-8")
+
 
 def extract_clinical_data_from_image(image_path: str) -> str:
     """
@@ -37,27 +39,26 @@ def extract_clinical_data_from_image(image_path: str) -> str:
         "prompt": prompt,
         "images": [base64_image],
         "stream": False,
-        "options": {
-            "temperature": 0.0,
-            "num_predict": 500
-        }
+        "options": {"temperature": 0.0, "num_predict": 500},
     }
 
     req = urllib.request.Request(
-        OLLAMA_API_URL, 
-        data=json.dumps(payload).encode('utf-8'),
-        headers={'Content-Type': 'application/json'}
+        OLLAMA_API_URL,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
     )
 
     try:
         response = urllib.request.urlopen(req)
-        result = json.loads(response.read().decode('utf-8'))
+        result = json.loads(response.read().decode("utf-8"))
         return result.get("response", "").strip()
     except urllib.error.URLError as e:
         raise RuntimeError(f"Failed to communicate with local Ollama VLM: {e}")
 
+
 if __name__ == "__main__":
     import sys
+
     if len(sys.argv) > 1:
         img_path = sys.argv[1]
         print(f"Extracting data from {img_path} using local VLM...")
