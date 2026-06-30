@@ -140,7 +140,13 @@ def insert_lab_metric(
             """INSERT INTO lab_metrics
                (clinical_insight_id, name, value, unit, is_abnormal)
                VALUES (?, ?, ?, ?, ?)""",
-            (clinical_insight_id, metric.name, metric.value, metric.unit, int(metric.is_abnormal)),
+            (
+                clinical_insight_id,
+                metric.name,
+                metric.value,
+                metric.unit,
+                int(metric.is_abnormal),
+            ),
         )
         if own_conn:
             conn.commit()
@@ -183,13 +189,11 @@ def get_metrics_for_charts(patient_id: int) -> list[dict]:
 def get_risk_summary() -> list[dict]:
     conn = get_connection()
     try:
-        rows = conn.execute(
-            """SELECT overall_risk, COUNT(*) as count
+        rows = conn.execute("""SELECT overall_risk, COUNT(*) as count
                FROM clinical_insights
                WHERE overall_risk IS NOT NULL
                GROUP BY overall_risk
-               ORDER BY overall_risk"""
-        ).fetchall()
+               ORDER BY overall_risk""").fetchall()
         return [dict(r) for r in rows]
     finally:
         conn.close()

@@ -46,9 +46,7 @@ def render_timeline():
             f"{p['first_name']} {p['last_name']} (DOB: {p['dob']})": p["id"]
             for p in patients
         }
-        selected_label = st.selectbox(
-            "Select Patient", list(patient_options.keys())
-        )
+        selected_label = st.selectbox("Select Patient", list(patient_options.keys()))
         selected_id = patient_options[selected_label]
 
     if selected_id is None:
@@ -61,9 +59,7 @@ def render_timeline():
 
     insights = sorted(record.insights, key=lambda i: i.visit_date)
 
-    st.subheader(
-        f"{record.first_name} {record.last_name}"
-    )
+    st.subheader(f"{record.first_name} {record.last_name}")
     st.caption(f"Date of Birth: {record.dob}")
 
     if not insights:
@@ -77,9 +73,11 @@ def render_timeline():
         risk_color = (
             "green"
             if insight.overall_risk == "Low"
-            else "orange" if insight.overall_risk == "Medium"
-            else "red" if insight.overall_risk == "High"
-            else "gray"
+            else (
+                "orange"
+                if insight.overall_risk == "Medium"
+                else "red" if insight.overall_risk == "High" else "gray"
+            )
         )
         risk_badge = (
             f":{risk_color}[**{insight.overall_risk}**]"
