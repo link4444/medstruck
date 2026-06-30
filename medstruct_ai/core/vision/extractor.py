@@ -4,9 +4,9 @@ import json
 import urllib.request
 import urllib.error
 
-# Default to llama3.2-vision for state-of-the-art offline Vision Language capabilities
-# It is vastly superior to llava at reading handwritten medical documents.
-VLM_MODEL = "llama3.2-vision"
+# Default to qwen3-vl:8b based on user preference
+# Very strong OCR and document parsing, but still heavy on CPU.
+VLM_MODEL = "qwen3-vl:8b"
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
 
 # T018: Inference Optimization
