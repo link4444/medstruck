@@ -45,7 +45,7 @@ def extract_clinical_data_from_image(image_path: str) -> str:
             "temperature": 0.0,
             "num_predict": 500,
             "num_thread": NUM_THREADS,
-            "num_ctx": 2048  # Cap context to prevent memory ballooning
+            "num_ctx": 8192  # Increased for Qwen-VL image token size
         }
     }
 
