@@ -19,7 +19,7 @@ def parse_lab_metrics(text: str) -> list[LabMetric]:
         unit = match.group(3).lower()
 
         try:
-            from core.logic import evaluate_metric_risk
+            from medstruct_ai.core.logic import evaluate_metric_risk
 
             risk = evaluate_metric_risk(name, value)
             is_abnormal = risk not in ("Normal", "Unknown")
