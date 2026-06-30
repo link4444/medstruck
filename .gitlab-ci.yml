@@ -1,0 +1,19 @@
+image: python:3.11
+
+stages:
+  - format
+  - lint
+
+before_script:
+  - python -m pip install --upgrade pip
+  - pip install black ruff
+
+black:
+  stage: format
+  script:
+    - black --check .
+
+ruff:
+  stage: lint
+  script:
+    - ruff check .
