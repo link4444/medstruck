@@ -4,9 +4,9 @@ import json
 import urllib.request
 import urllib.error
 
-# Default to llava for Vision Language capabilities
-# For CPU environments, moondream (1.8b) or llava (7b) are ideal.
-VLM_MODEL = "llava"
+# Default to llama3.2-vision for state-of-the-art offline Vision Language capabilities
+# It is vastly superior to llava at reading handwritten medical documents.
+VLM_MODEL = "llama3.2-vision"
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
 
 # T018: Inference Optimization
