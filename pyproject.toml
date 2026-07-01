@@ -2,4 +2,5 @@
 ignore = ["E501"]
 
 [tool.isort]
+profile = "black"
 skip = ["builds", "cache", "medstruct_ai/core/audio/whisper.cpp"]
