@@ -56,3 +56,9 @@ python scripts/init_db.py
 # Launch the Streamlit presentation dashboard
 streamlit run app/main.py
 ```
+
+## Project Metadata
+- [Changelog](CHANGELOG.md)
+- [Contributing Guidelines](CONTRIBUTING.md)
+- CI Pipeline: Configured with 10 strict checks (Black, Ruff, MyPy, Bandit, Safety, Semantic Commits, etc.) running on local GitLab Runner.
+
