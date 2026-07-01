@@ -1,2 +1,5 @@
 [tool.ruff]
 ignore = ["E501"]
+
+[tool.isort]
+skip = ["builds", "cache", "medstruct_ai/core/audio/whisper.cpp"]
