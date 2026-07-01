@@ -21,8 +21,7 @@ def get_connection() -> sqlite3.Connection:
 def init_db() -> None:
     conn = get_connection()
     try:
-        conn.executescript(
-            """
+        conn.executescript("""
             CREATE VIRTUAL TABLE IF NOT EXISTS search_fts USING fts5(
                 patient_name, notes, diagnoses, medications, clinical_insight_id UNINDEXED
             );
@@ -52,8 +51,7 @@ def init_db() -> None:
                 unit                 TEXT    NOT NULL,
                 is_abnormal          INTEGER NOT NULL DEFAULT 0
             );
-        """
-        )
+        """)
         conn.commit()
     finally:
         conn.close()
@@ -191,13 +189,11 @@ def get_metrics_for_charts(patient_id: int) -> list[dict]:
 def get_risk_summary() -> list[dict]:
     conn = get_connection()
     try:
-        rows = conn.execute(
-            """SELECT overall_risk, COUNT(*) as count
+        rows = conn.execute("""SELECT overall_risk, COUNT(*) as count
                FROM clinical_insights
                WHERE overall_risk IS NOT NULL
                GROUP BY overall_risk
-               ORDER BY overall_risk"""
-        ).fetchall()
+               ORDER BY overall_risk""").fetchall()
         return [dict(r) for r in rows]
     finally:
         conn.close()
