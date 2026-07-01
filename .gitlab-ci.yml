@@ -94,6 +94,6 @@ commit_lint:
   image: node:18
   before_script:
     - npm install -g @commitlint/cli @commitlint/config-conventional
-    - echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
+    - echo "module.exports = {extends:['@commitlint/config-conventional']}" > commitlint.config.js
   script:
     - npx commitlint --from HEAD~1 --to HEAD || echo "Semantic commit check soft fail"
