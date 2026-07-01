@@ -18,7 +18,10 @@ MODEL = "medstruct-qwen"
 # Leave at least 1 core for the UI to remain responsive during heavy generation
 NUM_THREADS = max(1, os.cpu_count() - 1) if os.cpu_count() else 4
 
-def generate_structured_clinical_insight(text_input: str, max_retries: int = 3) -> ClinicalInsight:
+
+def generate_structured_clinical_insight(
+    text_input: str, max_retries: int = 3
+) -> ClinicalInsight:
     """
     Passes raw unstructured clinical text to the local LLM and forces it to
     output a JSON structure that strictly matches the ClinicalInsight Pydantic schema.
@@ -44,24 +47,24 @@ def generate_structured_clinical_insight(text_input: str, max_retries: int = 3) 
             "model": MODEL,
             "prompt": current_prompt,
             "stream": False,
-            "format": "json", # Ollama native JSON mode
+            "format": "json",  # Ollama native JSON mode
             "options": {
                 "temperature": 0.0,
                 "num_predict": 1000,
                 "num_thread": NUM_THREADS,
-                "num_ctx": 2048  # Cap context to prevent memory ballooning
-            }
+                "num_ctx": 2048,  # Cap context to prevent memory ballooning
+            },
         }
 
         req = urllib.request.Request(
             OLLAMA_API_URL,
-            data=json.dumps(payload).encode('utf-8'),
-            headers={'Content-Type': 'application/json'}
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
         )
 
         try:
             response = urllib.request.urlopen(req)
-            result = json.loads(response.read().decode('utf-8'))
+            result = json.loads(response.read().decode("utf-8"))
             llm_output = result.get("response", "").strip()
 
             # Attempt to parse into our Pydantic model
@@ -74,7 +77,9 @@ def generate_structured_clinical_insight(text_input: str, max_retries: int = 3) 
         except ValidationError as e:
             logger.warning(f"Attempt {attempt} failed validation: {e}")
             if attempt == max_retries:
-                raise RuntimeError(f"LLM failed to produce valid schema after {max_retries} attempts.")
+                raise RuntimeError(
+                    f"LLM failed to produce valid schema after {max_retries} attempts."
+                )
 
             # Retry logic: feedback the exact Pydantic error to the LLM
             current_prompt = (
@@ -87,7 +92,9 @@ def generate_structured_clinical_insight(text_input: str, max_retries: int = 3) 
         except json.JSONDecodeError as e:
             logger.warning(f"Attempt {attempt} produced invalid JSON: {e}")
             if attempt == max_retries:
-                raise RuntimeError(f"LLM failed to produce valid JSON after {max_retries} attempts.")
+                raise RuntimeError(
+                    f"LLM failed to produce valid JSON after {max_retries} attempts."
+                )
 
             current_prompt = (
                 f"{base_prompt}\n\n"
@@ -96,6 +103,7 @@ def generate_structured_clinical_insight(text_input: str, max_retries: int = 3) 
             )
 
     raise RuntimeError("Unexpected failure in structured generation.")
+
 
 if __name__ == "__main__":
     # Quick Test

@@ -11,8 +11,7 @@ from medstruct_ai.core.audio.transcriber import transcribe_audio
 from medstruct_ai.core.parser import parse_lab_metrics
 from medstruct_ai.core.schemas import ClinicalInsight, PatientRecord
 from medstruct_ai.core.vision.extractor import extract_clinical_data_from_image
-from medstruct_ai.db.database import (init_db,
-                                      insert_patient_record)
+from medstruct_ai.db.database import init_db, insert_patient_record
 
 st.set_page_config(page_title="MedStruct AI", layout="wide")
 

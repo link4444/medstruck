@@ -1,4 +1,3 @@
-
 import streamlit as st
 
 from medstruct_ai.db.database import get_all_patients, get_patient_record
