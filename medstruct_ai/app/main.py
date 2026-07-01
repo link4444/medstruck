@@ -6,8 +6,8 @@ from pathlib import Path
 import fitz
 import streamlit as st
 
-from core.audio.transcriber import transcribe_audio
-from core.vision.extractor import extract_clinical_data_from_image
+from medstruct_ai.core.audio.transcriber import transcribe_audio
+from medstruct_ai.core.vision.extractor import extract_clinical_data_from_image
 from medstruct_ai.app.components.charts import render_dashboard
 from medstruct_ai.app.components.timeline import render_timeline
 from medstruct_ai.core.parser import parse_lab_metrics
