@@ -2,11 +2,8 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from medstruct_ai.db.database import (
-    get_all_patients,
-    get_metrics_for_charts,
-    get_risk_summary,
-)
+from medstruct_ai.db.database import (get_all_patients, get_metrics_for_charts,
+                                      get_risk_summary)
 
 
 def render_dashboard():

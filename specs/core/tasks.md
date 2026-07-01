@@ -58,4 +58,3 @@
 
 - [ ] T017 Network OFF Verification: Physically disconnect internet and test end-to-end ingestion and chat. (Nikhil)
 - [ ] T018 Inference Optimization: Tune local threads/context size to ensure UI remains responsive during generation. (Nikhil)
-

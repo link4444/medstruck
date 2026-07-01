@@ -1,18 +1,18 @@
-import io
 import tempfile
-from datetime import date, datetime
+from datetime import date
 from pathlib import Path
 
 import fitz
 import streamlit as st
 
-from medstruct_ai.core.audio.transcriber import transcribe_audio
-from medstruct_ai.core.vision.extractor import extract_clinical_data_from_image
 from medstruct_ai.app.components.charts import render_dashboard
 from medstruct_ai.app.components.timeline import render_timeline
+from medstruct_ai.core.audio.transcriber import transcribe_audio
 from medstruct_ai.core.parser import parse_lab_metrics
-from medstruct_ai.core.schemas import ClinicalInsight, LabMetric, PatientRecord
-from medstruct_ai.db.database import get_patient_record, init_db, insert_patient_record
+from medstruct_ai.core.schemas import ClinicalInsight, PatientRecord
+from medstruct_ai.core.vision.extractor import extract_clinical_data_from_image
+from medstruct_ai.db.database import (init_db,
+                                      insert_patient_record)
 
 st.set_page_config(page_title="MedStruct AI", layout="wide")
 

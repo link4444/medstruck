@@ -1,6 +1,6 @@
 # Contributing to MedStruct AI
 
-First off, thank you for considering contributing to MedStruct AI! This project is built as an offline-first, privacy-preserving medical AI dashboard. 
+First off, thank you for considering contributing to MedStruct AI! This project is built as an offline-first, privacy-preserving medical AI dashboard.
 
 ## Getting Started
 

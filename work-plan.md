@@ -1,12 +1,12 @@
 # MedStruct AI - Parallel Team Strategy & Work Plan
 
-To ensure maximum efficiency during the hackathon, Nikhil and Vasishta will execute tasks in parallel utilizing their core competencies. 
+To ensure maximum efficiency during the hackathon, Nikhil and Vasishta will execute tasks in parallel utilizing their core competencies.
 
 ## Day 1 Strategy
-1. **Morning Kick-off**: 
+1. **Morning Kick-off**:
    - **Nikhil** completes T001 and T002 (Engine Setup).
    - **Vasishta** completes T003 (App Shell and DB init).
-2. **Afternoon Foundation**: 
+2. **Afternoon Foundation**:
    - **Vasishta** tackles T004 and T005, establishing the DB schemas.
    - **Nikhil** focuses on T006, ensuring the LLM outputs valid JSON that Vasishta's Pydantic schemas can accept.
    - *End of Day Checkpoint*: Nikhil's Python output successfully writes to Vasishta's database without errors.

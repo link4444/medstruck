@@ -43,9 +43,9 @@ MedStruct AI is an offline-first, CPU-optimized clinical intelligence system des
 
 ```text
 specs/core/
-├── spec.md              
+├── spec.md
 ├── plan.md              # This file
-└── tasks.md             
+└── tasks.md
 ```
 
 ### Source Code (repository root)

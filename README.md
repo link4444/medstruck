@@ -2,7 +2,7 @@
 **Status: Air-Gapped / Local CPU Engine Active**
 
 ## Overview
-MedStruct AI is an offline-first, CPU-optimized clinical intelligence system designed to ingest unstructured medical inputs (lab report images, handwritten prescription photos, and doctor voice notes) and transform them into highly structured, validated relational datasets. 
+MedStruct AI is an offline-first, CPU-optimized clinical intelligence system designed to ingest unstructured medical inputs (lab report images, handwritten prescription photos, and doctor voice notes) and transform them into highly structured, validated relational datasets.
 
 Healthcare professionals face a growing challenge with medical data isolation and paper decay. Critical patient history is often locked away in unsearchable, unstructured formats, scattered across physical filing cabinets or static image scans. MedStruct AI solves this by deploying a fully local, privacy-preserving AI pipeline that digitizes, parses, and derives insights from these records without ever exposing patient data to the cloud.
 
@@ -61,4 +61,3 @@ streamlit run app/main.py
 - [Changelog](CHANGELOG.md)
 - [Contributing Guidelines](CONTRIBUTING.md)
 - CI Pipeline: Configured with 10 strict checks (Black, Ruff, MyPy, Bandit, Safety, Semantic Commits, etc.) running on local GitLab Runner.
-

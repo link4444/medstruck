@@ -66,7 +66,7 @@ A healthcare professional searches for a patient's historical records (e.g., "pa
 - **FR-004**: System MUST validate all LLM outputs strictly against Pydantic v2 schemas.
 - **FR-005**: System MUST compute and persist a "Derived Risk Level" (Low, Medium, High) for each patient visit based on lab metrics.
 
-### Key Entities 
+### Key Entities
 
 - **PatientRecord**: First name, last name, DOB, and a list of clinical insights.
 - **ClinicalInsight**: Visit date, notes, diagnoses, medications, lab metrics, and overall computed risk level.

@@ -1,8 +1,8 @@
-import os
 import base64
 import json
-import urllib.request
+import os
 import urllib.error
+import urllib.request
 
 # Default to qwen3-vl:8b based on user preference
 # Very strong OCR and document parsing, but still heavy on CPU.
@@ -17,7 +17,7 @@ def encode_image(image_path: str) -> str:
     """Encodes an image to a base64 string."""
     if not os.path.exists(image_path):
         raise FileNotFoundError(f"Image not found: {image_path}")
-    
+
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode('utf-8')
 
@@ -50,7 +50,7 @@ def extract_clinical_data_from_image(image_path: str) -> str:
     }
 
     req = urllib.request.Request(
-        OLLAMA_API_URL, 
+        OLLAMA_API_URL,
         data=json.dumps(payload).encode('utf-8'),
         headers={'Content-Type': 'application/json'}
     )
